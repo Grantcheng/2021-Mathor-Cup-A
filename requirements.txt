@@ -199,5 +199,4 @@ widgetsnbextension==3.5.2
 wrapt==1.12.1
 xgboost==1.5.1
 zope.interface==5.4.0
-
 tensorly>=0.7.0
