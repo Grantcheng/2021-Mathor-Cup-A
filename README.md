@@ -1,66 +1,40 @@
 # 2021-Mathor-Cup-A
 
  The answer of  Question A in "2021 Mathor Cup" Competition
+ 
+ ![](https://shields.io/badge/language-Chinese%20simplified-orange)
+ ![](https://shields.io/badge/dependencies-Python%203.9-blue)
 
-----
+## Tasks
 
-2021年Mathor Cup大数据建模竞赛参赛文档 - 程序源码说明书
+The language of this competition is Chinese simplified.
 
-选择赛题: A
+[2021年MathorCup大数据挑战赛-赛道A.pdf](https://github.com/cloudy-sfu/2021-Mathor-Cup-A/files/7881846/2021.MathorCup.-.A.pdf)
 
-----
+## Usage
 
-## Acknowledgement
+The scripts use features of Jetbrains PyCharm scientific mode. You should run a script section-by-section, where sections are splitted by `# %%` symbol.
 
-BHT-ARIMA: https://github.com/huawei-noah/BHT-ARIMA
+For problem 1:
 
-## 软件描述
+1. `Q1_description_report.py` generates description statistical reports for raw and pre-processed data.
+2. `Q1_pre_processing.py` performs data pre-processing, where `pre_processor.py` provides transformers in some of steps.
+3. `Q1_correlation.py` performs further pre-processing steps, based on correlation between variables.
+4. `Q1_adaboost.py, Q1_random_forest.py, Q1_xgboost.py` are regression models.
+5. `Q1_stacking.py` fits a stacking model on k-fold dataset, based on models configured in step (4).
+6. `Q1_refit_stacking.py` fits a stacking model on all samples.
+7. `Q1_app_stacking.py` applies the model trained in step (6), and predicts the dependent variables on test set.
 
-**本软件实现了2021年Mathor Cup大数据建模竞赛参赛论文中报告的结果, 共分3个问题, 分别以Q1, Q2, Q3为前缀. 每个问题的分析过程和结果如下:**
+For problem 2:
 
-在问题一中，首先建立数据预处理管线，分多步骤将二手车车况特征变换为标准化测度变量，依次根据现实意义解析变量、进行数据空间变换、缺失值填充、极端值识别、区间压缩，并通过$\phi(k)$非线性相关性分析作出特征筛选。二手车车况特征共有35个自变量，经过数据预处理，共构建了8个新特征，删除了21个特征，最终数据集中有22个特征。接着，本文依次建立随机森林回归、XGBoost回归、AdaBoost决策树回归模型，拟合预处理后的二手车车况特征和二手车价格，使用给定的模型评价公式，在验证集上获得了最高53.3分的预测性能；而神经网络和随机梯度下降回归算法不能获得较好的结果。最后，本文通过Stacking增强方法组合表现较好的回归器，建立复合模型，在验证集上获得最高53.9分的预测性能；组合模型的表现超过了其中每一个基模型。
+1. `Q2_pre_processing.py` performs data pre-processing, where `pre_processor.py, pre_processor_extended.py` both provide transformers in some of steps.
+2. `Q2_random_forest.py` builds a random forest model on k-fold dataset, and outputs feature importances.
+3. `Q2_anova.py` performs a statistics test, researching whether heteroscedasticity exists.
 
-在问题二中，合并二手车车况特征、销售价格变化特征，使用和问题一相似的方法进行数据预处理。为了评估售出时间，构建了销售生命周期特征作为因变量，将售出和未售出的二手车用统一变量表示。以预处理后的所有特征为自变量，以销售生命周期为因变量，通过随机森林回归模型拟合，拟合的模型在验证集上的回归误差MAE是4%. 接着，计算每个特征对分类的重要性，按重要性从大到小排列，最重要的影响因素依次是：相比新车的折扣、行驶里程、上牌距销售的时间、第13个匿名变量、城市、车辆长宽；其它影响因素的重要性小于5%.  最后，对销售时间分组，对每个影响因素作方差分析，评价特定销售时间区间中的样本，其各因素的方差是否与总体有显著差异。结果显示，相比新车的折扣与销售时间的相关性最大，城市能够影响二手车是否在上架后3~6个月中售出；其余影响因素不能独立影响销售时间，但是多个因素组合后能够影响销售时间。
+For problem 3:
 
-在问题三中，单独研究售出时间和成交价，将成交的订单按分段时间汇总，分析成交额随时间的变化关系。通过单位根检验确定差分阶数，通过PACF和ACF检验定阶，构建ARIMA模型预测下一个时间段的交易额。对回归结果作Ljung浑成检验，结果在12个滞后阶上没有ARCH效应，不需要进一步建立GARCH模型。周期性检验检的结论是，交易额存在11.6日和12.9日的双周期。
+I research on the periodicity of traded amount over time.
 
-## 软件运行环境
-
-| 项      | 参数                                      |
-| ------ | --------------------------------------- |
-| 操作系统   | Ubuntu 20.04 LTS                        |
-| 软件开发工具 | JetBrains PyCharm 2021.2                |
-| 依赖软件   | Python 3.9, 在requirements.txt列出的PyPi函数库 |
-| 开发语言   | Python 3.9                              |
-
-在未被采用的算法, 即`contrib/Q3_lstm.py`中, 使用了`tensorflow-gpu`函数库. 如不需要, 或计算机使用CPU进行运算, 请在`requirements.txt` 中删除该依赖项; 如计算机不使用NVIDIA GPU进行运算, 请替换为`tensorflow`.
-
-## 软件设计与实现
-
-### (1) 软件设计
-
-
-
-### (2) 工作模块
-
-
-
-### (3) 主要源码文件的作用
-
-
-
-## 软件使用说明
-
-使用前, 定位到项目目录, 运行以下命令:
-
-```bash
-pip install -r requirements.txt
-```
-
-在项目目录下建立`raw/`, `results/`空目录.
-
-运行所需要的脚本, 获得结果. 可在 `# %%` 处分节运行, 获得所需部分结果, 该特性由 Jetbrains PyCharm 提供.
-
-`contrib` 是未被采用的模型.
-
-
+1. `Q3_pre_processing.py` performs pre-processing for time series data.
+2. `Q3_arima_get_orders.py` calculates orders for ARIMA model.
+3. `Q3_arima.py` builds an ARIMA model and outputs statistical tests on residual and periodicity.
