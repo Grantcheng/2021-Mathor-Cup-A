@@ -5,11 +5,19 @@
  ![](https://shields.io/badge/language-Chinese%20simplified-orange)
  ![](https://shields.io/badge/dependencies-Python%203.9-blue)
 
-## Tasks
+## Question
 
 The language of this competition is Chinese simplified.
 
 [2021年MathorCup大数据挑战赛-赛道A.pdf](https://github.com/cloudy-sfu/2021-Mathor-Cup-A/files/7881846/2021.MathorCup.-.A.pdf)
+
+## Warning
+
+**There are some scientific errors in this program:**
+
+We should not use correlation matrix to filter variables; instead, we should use vairance inflection factors (VIF).
+
+The "ANOVA" part is not ANOVA in fect; we should ignore it before using this program.
 
 ## Usage
 
