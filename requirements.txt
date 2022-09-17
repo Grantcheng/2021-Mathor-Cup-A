@@ -90,7 +90,7 @@ netron==5.0.7
 networkx==2.5.1
 nibabel==3.2.1
 nipype==1.6.1
-notebook==6.4.6
+notebook==6.4.12
 numpy==1.22.0
 oauthlib==3.1.0
 opencv-python==4.5.2.52
